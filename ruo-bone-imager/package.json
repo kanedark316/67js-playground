@@ -1,0 +1,26 @@
+{
+  "name": "ruo-bone-imager",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Research Use Only bone-interface imaging annotation app (Phase 1: S0 + S2 + E8)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "lint:claims": "node scripts/claim-lint.mjs",
+    "pretest": "node scripts/claim-lint.mjs"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "typescript": "~5.9.2",
+    "vite": "^7.1.5"
+  }
+}
