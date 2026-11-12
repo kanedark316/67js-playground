@@ -1,4 +1,5 @@
 import { RUO_BANNER_VERSION } from '../claim-lint/forbiddenPhrases.ts';
+import { randomToken, safeFixtureSrc } from '../util/security.ts';
 import type { FrameStub, ResearchSession, SessionMeta } from './types.ts';
 
 export const SOFTWARE_VERSION = '0.1.0';
@@ -15,7 +16,7 @@ export function createSampleFrames(): FrameStub[] {
   return [0, 1, 2, 3].map((index) => ({
     frame_id: `frame-${index}`,
     index,
-    path: `/fixtures/cine/frame-${index}.svg`,
+    path: safeFixtureSrc(`/fixtures/cine/frame-${index}.svg`),
     width_px: FRAME_WIDTH,
     height_px: FRAME_HEIGHT,
     mm_per_px: MM_PER_PX,
@@ -24,8 +25,18 @@ export function createSampleFrames(): FrameStub[] {
 
 export function createSessionId(): string {
   const stamp = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);
-  const rand = Math.random().toString(36).slice(2, 8);
-  return `sess-${stamp}-${rand}`;
+  return `sess-${stamp}-${randomToken(4)}`;
+}
+
+/** Re-bind fixture paths after localStorage load so img.src stays allowlisted. */
+export function sanitizeLoadedSession(session: ResearchSession): ResearchSession {
+  return {
+    ...session,
+    frames: session.frames.map((frame) => ({
+      ...frame,
+      path: safeFixtureSrc(frame.path),
+    })),
+  };
 }
 
 export function createDefaultMeta(overrides: Partial<SessionMeta> = {}): SessionMeta {

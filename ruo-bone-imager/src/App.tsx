@@ -15,6 +15,7 @@ import {
 import {
   createSampleSession,
   metaGateErrors,
+  sanitizeLoadedSession,
 } from './session/sampleSession.ts';
 import type {
   Annotation,
@@ -30,7 +31,7 @@ function loadSession(): ResearchSession | null {
     if (!raw) {
       return null;
     }
-    return JSON.parse(raw) as ResearchSession;
+    return sanitizeLoadedSession(JSON.parse(raw) as ResearchSession);
   } catch {
     return null;
   }

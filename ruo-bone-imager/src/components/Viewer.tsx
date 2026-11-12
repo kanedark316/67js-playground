@@ -8,6 +8,7 @@ import type {
   Modality,
   PointPx,
 } from '../session/types.ts';
+import { safeFixtureSrc, safeLabel } from '../util/security.ts';
 
 export type ToolMode = 'pan' | 'cortical' | 'caliper';
 
@@ -150,7 +151,11 @@ export function Viewer({
           }
         }}
       >
-        <img src={frame.path} alt={`Sample B-mode ${frame.frame_id}`} draggable={false} />
+        <img
+          src={safeFixtureSrc(frame.path)}
+          alt={`Sample B-mode ${safeLabel(frame.frame_id)}`}
+          draggable={false}
+        />
         <canvas ref={canvasRef} />
         <div className="depth-scale" aria-hidden="true" />
         <div className="probe-glyph" aria-hidden="true" />
