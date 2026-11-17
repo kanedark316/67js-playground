@@ -21,4 +21,6 @@ The MCP server takes input from AI agents, and that input can come from a prompt
 
 ## Dependencies
 
-The `Test` workflow runs `npm audit` on each pull request and fails on a high or critical advisory. `zod` and other packages count even when they are development dependencies, because the build bundles them into the MCP server. Dependabot opens grouped updates each week.
+The `Test` workflow runs `node scripts/ci-audit.mjs` on each pull request and fails on a high or critical advisory. `zod` and other packages count even when they are development dependencies, because the build bundles them into the MCP server. Dependabot opens grouped updates each week.
+
+When an advisory has **no patched upstream release** yet (for example `GHSA-fc5q-39xc-vjpf` / picomatch through 4.0.7), `scripts/ci-audit.mjs` may allowlist that GHSA temporarily. Do not force-downgrade Vite to silence it. Remove the allowlist entry as soon as a patched picomatch (or Vite) release clears the report.
