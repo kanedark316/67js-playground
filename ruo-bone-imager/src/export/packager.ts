@@ -30,6 +30,19 @@ export function buildExportBundle(session: ResearchSession): ExportBundle {
     annotations,
   };
 
+  const annotationsByFrame = session.frames.map((f) => ({
+    schema_version: '1.0.0',
+    session_id: session.meta.session_id,
+    frame_id: f.frame_id,
+    mm_per_px: f.mm_per_px,
+    annotations: session.annotations_by_frame[f.frame_id] ?? [],
+  }));
+
+  const totalAnnotations = annotationsByFrame.reduce(
+    (sum, doc) => sum + doc.annotations.length,
+    0,
+  );
+
   const software_versions = {
     app: session.meta.software_version,
     banner: session.meta.banner_version || RUO_BANNER_VERSION,
@@ -43,7 +56,8 @@ export function buildExportBundle(session: ResearchSession): ExportBundle {
     banner_version: software_versions.banner,
     created_at: new Date().toISOString(),
     frame_count: session.frames.length,
-    annotation_count: annotations.length,
+    annotation_count: totalAnnotations,
+    current_frame_id: frame.frame_id,
     dual_mod_id: session.meta.dual_mod_id ?? null,
     protocol_id: session.meta.protocol_id,
   };
@@ -52,6 +66,7 @@ export function buildExportBundle(session: ResearchSession): ExportBundle {
     'manifest.json': JSON.stringify(manifest, null, 2),
     'meta.json': JSON.stringify(session.meta, null, 2),
     'annotations.json': JSON.stringify(annotationsDoc, null, 2),
+    'annotations_by_frame.json': JSON.stringify(annotationsByFrame, null, 2),
     'qc.json': JSON.stringify(session.qc, null, 2),
     'software_versions.json': JSON.stringify(software_versions, null, 2),
     'derived/frames/README.txt':

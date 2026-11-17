@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from 'react';
 import { createId, gapWidthMm } from '../annotation/geometry.ts';
 import type {
   Annotation,
@@ -51,6 +56,11 @@ export function Viewer({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [draftPoints, setDraftPoints] = useState<PointPx[]>([]);
   const [caliperStart, setCaliperStart] = useState<PointPx | null>(null);
+
+  useEffect(() => {
+    setDraftPoints([]);
+    setCaliperStart(null);
+  }, [frame.frame_id, tool]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -135,12 +145,7 @@ export function Viewer({
   }
 
   return (
-    <section className="panel">
-      <h2>B-mode viewer (fixture / cine stub)</h2>
-      <p className="muted">
-        Sample synthetic frames — no live probe driver in this build. Depth scale and
-        probe glyph are research chrome only.
-      </p>
+    <section className="panel" style={{ paddingTop: '0.85rem' }}>
       <div
         className="viewer-wrap"
         ref={wrapRef}
@@ -160,9 +165,10 @@ export function Viewer({
         <div className="depth-scale" aria-hidden="true" />
         <div className="probe-glyph" aria-hidden="true" />
       </div>
-      <div className="viewer-meta">
+      <div className="viewer-meta" style={{ marginTop: '0.55rem' }}>
         <span>
-          {frame.frame_id} · {frame.width_px}×{frame.height_px} · {frame.mm_per_px} mm/px
+          {frame.frame_id} · {frame.width_px}×{frame.height_px} ·{' '}
+          {frame.mm_per_px} mm/px
         </span>
         <span>
           {tool === 'cortical'
@@ -177,14 +183,22 @@ export function Viewer({
           <button type="button" className="secondary" onClick={finishPolyline}>
             Finish cortical polyline ({draftPoints.length} pts)
           </button>
-          <button type="button" className="ghost" onClick={() => setDraftPoints([])}>
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => setDraftPoints([])}
+          >
             Cancel draft
           </button>
         </div>
       ) : null}
       {caliperStart ? (
         <div className="btn-row">
-          <button type="button" className="ghost" onClick={() => setCaliperStart(null)}>
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => setCaliperStart(null)}
+          >
             Cancel caliper start
           </button>
         </div>

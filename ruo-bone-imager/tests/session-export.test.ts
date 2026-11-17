@@ -59,7 +59,9 @@ describe('S0 export stub', () => {
     const bundle = buildExportBundle(session);
     assert.match(String(bundle.manifest.ruo_notice), /RESEARCH USE ONLY/i);
     assert.equal(bundle.annotations.annotations.length, 1);
+    assert.equal(bundle.manifest.annotation_count, 1);
     assert.ok(bundle.files['annotations.json'].includes('gap_caliper'));
+    assert.ok(bundle.files['annotations_by_frame.json'].includes(frameId));
     assert.ok(bundle.files['qc.json']);
   });
 

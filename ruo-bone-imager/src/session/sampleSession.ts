@@ -2,7 +2,7 @@ import { RUO_BANNER_VERSION } from '../claim-lint/forbiddenPhrases.ts';
 import { randomToken, safeFixtureSrc } from '../util/security.ts';
 import type { FrameStub, ResearchSession, SessionMeta } from './types.ts';
 
-export const SOFTWARE_VERSION = '0.1.0';
+export const SOFTWARE_VERSION = '0.2.0';
 
 export const DEFAULT_PROTOCOL_ID = 'PHANTOM-TIBIA-v1';
 export const DEFAULT_DUAL_MOD_ID = 'DUAL-MW-US-E3-v1';

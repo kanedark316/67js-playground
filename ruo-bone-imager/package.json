@@ -1,9 +1,9 @@
 {
   "name": "ruo-bone-imager",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Research Use Only bone-interface imaging annotation app (Phase 1: S0 + S2 + E8)",
+  "description": "Research Use Only bone-interface imaging annotation app (Phase 1 polished UI: S0 + S2 + E8)",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

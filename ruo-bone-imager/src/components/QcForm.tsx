@@ -40,12 +40,12 @@ function BoolToggle({
 export function QcForm({ qc, onChange }: Props) {
   return (
     <section className="panel">
-      <h2>QC form (S2)</h2>
+      <h2>QC checklist</h2>
       <p className="muted">
-        Operator checklist for coupling, landmark visibility, and motion. Scores are
-        research QC only — not a clinical finding.
+        Coupling, landmark visibility, and motion flags for the research record.
+        Not a clinical finding.
       </p>
-      <div className="field-grid">
+      <div className="field-grid" style={{ marginTop: '0.55rem' }}>
         <BoolToggle
           label="Coupling OK?"
           value={qc.coupling_ok}
