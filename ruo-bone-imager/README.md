@@ -11,11 +11,11 @@ This package is a standalone Vite + React + TypeScript app under `ruo-bone-image
 
 | Slice | Coverage |
 | --- | --- |
-| **S0** | RUO splash + always-on banner; session create/open (localStorage); meta fields (`protocol_id` default `PHANTOM-TIBIA-v1`, optional `dual_mod_id`); sample B-mode / cine fixture; export ZIP + JSON stub |
-| **S2** | Cortical polyline tool; gap caliper (mm from `mm_per_px`); annotations JSON in export; QC form (coupling / landmark / motion / cortical_line_qc) |
+| **S0** | Full-bleed RUO splash with brand hero; always-on sticky banner; session create/open (localStorage); meta fields (`protocol_id` default `PHANTOM-TIBIA-v1`, optional `dual_mod_id`); sample B-mode / cine fixture; export ZIP + JSON (current frame + all-frame annotations) |
+| **S2** | Cortical polyline tool; gap caliper (mm from `mm_per_px`); annotations list; QC form (coupling / landmark / motion / cortical_line_qc) |
 | **E8** | Shared forbidden-phrase list from Project safety doc; unit tests; `npm run lint:claims` / `npm test` gate; GitHub Actions workflow |
 
-**Out of scope here:** live US probe drivers, microwave hardware, ionizing sources.
+**Out of scope here:** live US probe drivers, microwave hardware, ionizing sources, soft-tissue/muscle product modes, deep organ or brain imaging.
 
 ## Run locally
 

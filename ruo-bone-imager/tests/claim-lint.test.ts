@@ -73,8 +73,16 @@ describe('E8 claim lint scanner', () => {
 });
 
 describe('App copy hygiene', () => {
-  it('App.tsx and README have no forbidden phrases', () => {
-    for (const rel of ['src/App.tsx', 'README.md', 'src/components/RuoSplash.tsx']) {
+  it('UI and README have no forbidden phrases', () => {
+    for (const rel of [
+      'src/App.tsx',
+      'README.md',
+      'src/components/RuoSplash.tsx',
+      'src/components/SessionForm.tsx',
+      'src/components/QcForm.tsx',
+      'src/components/Viewer.tsx',
+      'index.html',
+    ]) {
       const text = readFileSync(join(root, rel), 'utf8');
       assert.deepEqual(findForbiddenPhrases(text), [], rel);
     }

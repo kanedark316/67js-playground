@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ./.github/actions/setup
-      - run: npm audit --audit-level=high
+      - run: node scripts/ci-audit.mjs
 
   # Size and tool cost compare against the pull request base, which only a merge commit has, so a release run skips them.
   size:

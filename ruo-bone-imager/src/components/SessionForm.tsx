@@ -22,18 +22,21 @@ export function SessionForm({ meta, onChange, onNewSession, gateErrors }: Props)
   }
 
   return (
-    <section className="panel">
-      <h2>Session metadata (S0)</h2>
+    <details className="panel session-details">
+      <summary>
+        Session metadata
+        <span className="meta-chip" style={{ marginLeft: 'auto' }}>
+          {meta.session_id}
+        </span>
+      </summary>
       <div className="field-grid">
-        <label>
-          session_id
-          <input value={meta.session_id} readOnly />
-        </label>
         <label>
           protocol_id
           <input
             value={meta.protocol_id}
-            onChange={(e) => patch('protocol_id', e.target.value || DEFAULT_PROTOCOL_ID)}
+            onChange={(e) =>
+              patch('protocol_id', e.target.value || DEFAULT_PROTOCOL_ID)
+            }
             list="protocol-options"
           />
           <datalist id="protocol-options">
@@ -47,7 +50,10 @@ export function SessionForm({ meta, onChange, onNewSession, gateErrors }: Props)
             value={meta.dual_mod_id ?? ''}
             placeholder="leave empty or set DUAL-MW-US-E3-v1"
             onChange={(e) =>
-              patch('dual_mod_id', e.target.value.trim() ? e.target.value.trim() : undefined)
+              patch(
+                'dual_mod_id',
+                e.target.value.trim() ? e.target.value.trim() : undefined,
+              )
             }
             list="dual-mod-options"
           />
@@ -116,7 +122,9 @@ export function SessionForm({ meta, onChange, onNewSession, gateErrors }: Props)
           >
             <option value="none">none</option>
             <option value="xray_pending">xray_pending</option>
-            <option value="xray_available_not_linked">xray_available_not_linked</option>
+            <option value="xray_available_not_linked">
+              xray_available_not_linked
+            </option>
           </select>
         </label>
         <label>
@@ -144,6 +152,6 @@ export function SessionForm({ meta, onChange, onNewSession, gateErrors }: Props)
           Create new session
         </button>
       </div>
-    </section>
+    </details>
   );
 }
